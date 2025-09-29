@@ -1,7 +1,7 @@
 import "./CheckoutPage.css";
 import "./checkout-header.css";
 import { Link } from "react-router-dom";
-export function CheckoutPage() {
+export function CheckoutPage({cart}) {
   return (
     <>
       <title>Checkout</title>
@@ -17,7 +17,7 @@ export function CheckoutPage() {
           <div class="checkout-header-middle-section">
             Checkout (
             <a class="return-to-home-link" href="/">
-              3 items
+              {cart.items}
             </a>
             )
           </div>
