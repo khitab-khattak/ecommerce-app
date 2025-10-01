@@ -2,8 +2,8 @@ import dayjs from "dayjs";
 import { formatMoney } from "../../utils/money";
 export function DeliveryOption({deliveryOptions,cartItem}){
 return(
-    <div class="delivery-options">
-    <div class="delivery-options-title">
+    <div className="delivery-options">
+    <div className="delivery-options-title">
       Choose a delivery option:
     </div>
     {deliveryOptions.map((deliveryOption) => {
@@ -24,16 +24,16 @@ return(
               deliveryOption.id ===
               cartItem.deliveryOptionId
             }
-            class="delivery-option-input"
+            className="delivery-option-input"
             name={`delivery-option-${cartItem.productId}`}
           />
           <div>
-            <div class="delivery-option-date">
+            <div className="delivery-option-date">
               {dayjs(
                 deliveryOption.estimatedDeliveryTimeMs
               ).format("dddd, MMMM, D")}
             </div>
-            <div class="delivery-option-price">
+            <div className="delivery-option-price">
               {priceString}
             </div>
           </div>

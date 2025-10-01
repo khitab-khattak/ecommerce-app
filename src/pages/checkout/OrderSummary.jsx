@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { DeliveryOption } from "./DeliveryOption";
 export function OrderSummary({deliveryOptions,cart}){
     return (
-        <div class="order-summary">
+        <div className="order-summary">
         {deliveryOptions.length > 0 &&
           cart.map((cartItem) => {
             const selectedDeliveryOption = deliveryOptions.find(
@@ -12,7 +12,7 @@ export function OrderSummary({deliveryOptions,cart}){
               }
             );
             return (
-              <div key={cartItem.productId} class="cart-item-container">
+              <div key={cartItem.productId} className="cart-item-container">
                 <div className="delivery-date">
                   Delivery date:{" "}
                   {dayjs(
@@ -20,25 +20,25 @@ export function OrderSummary({deliveryOptions,cart}){
                   ).format("dddd, MMMM, D")}
                 </div>
 
-                <div class="cart-item-details-grid">
-                  <img class="product-image" src={cartItem.product.image} />
+                <div className="cart-item-details-grid">
+                  <img className="product-image" src={cartItem.product.image} />
 
-                  <div class="cart-item-details">
-                    <div class="product-name">{cartItem.product.name}</div>
-                    <div class="product-price">
+                  <div className="cart-item-details">
+                    <div className="product-name">{cartItem.product.name}</div>
+                    <div className="product-price">
                       {formatMoney(cartItem.product.priceCents)}
                     </div>
-                    <div class="product-quantity">
+                    <div className="product-quantity">
                       <span>
                         Quantity:{" "}
-                        <span class="quantity-label">
+                        <span className="quantity-label">
                           {cartItem.quantity}
                         </span>
                       </span>
-                      <span class="update-quantity-link link-primary">
+                      <span className="update-quantity-link link-primary">
                         Update
                       </span>
-                      <span class="delete-quantity-link link-primary">
+                      <span className="delete-quantity-link link-primary">
                         Delete
                       </span>
                     </div>

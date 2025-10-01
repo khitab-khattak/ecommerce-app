@@ -32,33 +32,33 @@ export function CheckoutPage({ cart }) {
   return (
     <>
       <title>Checkout</title>
-      <div class="checkout-header">
-        <div class="header-content">
-          <div class="checkout-header-left-section">
+      <div className="checkout-header">
+        <div className="header-content">
+          <div className="checkout-header-left-section">
             <Link to="/">
-              <img class="logo" src="images/logo.png" />
-              <img class="mobile-logo" src="images/mobile-logo.png" />
+              <img className="logo" src="images/logo.png" />
+              <img className="mobile-logo" src="images/mobile-logo.png" />
             </Link>
           </div>
 
-          <div class="checkout-header-middle-section">
+          <div className="checkout-header-middle-section">
             Checkout (
-            <a class="return-to-home-link" href="/">
+            <a className="return-to-home-link" href="/">
               {totalQuantity}
             </a>
             )
           </div>
 
-          <div class="checkout-header-right-section">
+          <div className="checkout-header-right-section">
             <img src="images/icons/checkout-lock-icon.png" />
           </div>
         </div>
       </div>
 
-      <div class="checkout-page">
-        <div class="page-title">Review your order</div>
+      <div className="checkout-page">
+        <div className="page-title">Review your order</div>
 
-        <div class="checkout-grid">
+        <div className="checkout-grid">
           <OrderSummary deliveryOptions={deliveryOptions} cart={cart} />
           <PaymentSummary paymentSummary={paymentSummary}/>
         </div>
