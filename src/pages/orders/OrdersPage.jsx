@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { OrderGrid } from "./OrderGrid";
-export function OrdersPage({ cart }) {
+export function OrdersPage({ cart,loadCart }) {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     const fetchOrders= async()=>{
@@ -23,7 +23,7 @@ export function OrdersPage({ cart }) {
       <div className="orders-page">
         <div className="page-title">Your Orders</div>
 
-      <OrderGrid orders= {orders}/>
+      <OrderGrid orders= {orders} loadCart={loadCart}/>
       </div>
     </>
   );
