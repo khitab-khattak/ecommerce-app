@@ -21,14 +21,14 @@ export function Product({ products, loadCart }) {
   return (
     <div key={products.id} className="product-container">
       <div className="product-image-container">
-        <img className="product-image" src={products.image} />
+        <img className="product-image" data-testid="product-image-test" src={products.image} />
       </div>
 
       <div className="product-name limit-text-to-2-lines">{products.name}</div>
 
       <div className="product-rating-container">
         <img
-          className="product-rating-stars"
+          className="product-rating-stars" data-testid="product-rating-image-test"
           src={`images/ratings/rating-${products.rating.stars * 10}.png`}
         />
         <div className="product-rating-count link-primary">
