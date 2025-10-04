@@ -3,18 +3,35 @@ import dayjs from "dayjs";
 import { Fragment } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export function OrderGrid({ orders, loadCart }) {
+  const [error, setError] = useState(null);
+
   const addToCart = async (productId, quantity) => {
-    await axios.post("/api/cart-items", {
-      productId,
-      quantity,
-    });
-    await loadCart();
+    const validQuantity = Math.min(Math.max(quantity || 1, 1), 10);
+
+    try {
+      await axios.post("/api/cart-items", {
+        productId,
+        quantity: validQuantity,
+      });
+      await loadCart();
+      setError(null); // clear any previous error
+    } catch (err) {
+      const message = err.response?.data?.error || "Failed to add product.";
+      setError(`Product ${productId}: ${message}`);
+    }
   };
 
   return (
     <div className="orders-grid">
+      {error && (
+        <div className="order-error" style={{ color: "red", marginBottom: "10px" }}>
+          {error}
+        </div>
+      )}
+
       {orders.map((order) => (
         <div key={order.id} className="order-container">
           {/* Order Header */}
@@ -40,30 +57,35 @@ export function OrderGrid({ orders, loadCart }) {
             {order.products.map((orderProduct) => (
               <Fragment key={orderProduct.product.id}>
                 <div className="product-image-container">
-                  <img src={orderProduct.product.image} alt={orderProduct.product.name}/>
+                  <img
+                    src={orderProduct.product.image}
+                    alt={orderProduct.product.name}
+                  />
                 </div>
 
                 <div className="product-details">
                   <div className="product-name">{orderProduct.product.name}</div>
                   <div className="product-delivery-date">
                     Arriving on:{" "}
-                    {dayjs(orderProduct.estimatedDeliveryTimeMs).format("dddd, MMMM D")}
+                    {dayjs(orderProduct.estimatedDeliveryTimeMs).format(
+                      "dddd, MMMM D"
+                    )}
                   </div>
                   <div className="product-quantity">
                     Quantity: {orderProduct.quantity}
                   </div>
                   <button
-                    className=" add-to-cart-btn"
-                  
+                    className="add-to-cart-btn"
+                    onClick={() =>
+                      addToCart(orderProduct.product.id, orderProduct.quantity)
+                    }
                   >
                     <img
                       className="buy-again-icon"
                       src="images/icons/buy-again.png"
                       alt="buy again"
                     />
-                    <span className="buy-again-message"  onClick={() =>
-                      addToCart(orderProduct.product.id, orderProduct.quantity)
-                    } >Add to Cart</span>
+                    <span className="buy-again-message">Add to Cart</span>
                   </button>
                 </div>
 
@@ -82,3 +104,4 @@ export function OrderGrid({ orders, loadCart }) {
     </div>
   );
 }
+
